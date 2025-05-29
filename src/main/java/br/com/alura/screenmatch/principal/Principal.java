@@ -1,5 +1,6 @@
 package br.com.alura.screenmatch.principal;
 
+import br.com.alura.screenmatch.model.DadosEpisodio;
 import br.com.alura.screenmatch.model.DadosSerie;
 import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoAPI;
@@ -49,5 +50,17 @@ public class Principal {
         // Realiza a mesma impressão da linha 52 **** System.out.println(dadosTemporada);****
         //temporadas.forEach(System.out::println);
 
+        // Esse trecho percorre as temporadas e acessa cada episodio e exibe o título
+//        for(int i = 0; i < dados.totalTemporadas(); i++){
+//            List<DadosEpisodio> episodiosTemporada = temporadas.get(i).episodios();
+//            for (int j = 0; j <episodiosTemporada.size(); j++){
+//                System.out.println(episodiosTemporada.get(j).titulo());
+//            }
+//        }
+
+        // Esse trecho percorre as temporadas e acessa cada episodio e exibe o título assim como o trecho acima, no entanto
+        // é utilizado expressão lambda, ou seja o código fica mais limpo, mais clean, e mais sucinto,
+        // toda execução é feita por trás
+        temporadas.forEach(t-> t.episodios().forEach(e-> System.out.println(e.titulo())));
     }
 }
