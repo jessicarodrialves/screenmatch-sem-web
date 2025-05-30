@@ -6,10 +6,8 @@ import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoAPI;
 import br.com.alura.screenmatch.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Principal {
     Scanner recebeDados  = new Scanner(System.in);
@@ -60,7 +58,24 @@ public class Principal {
 
         // Esse trecho percorre as temporadas e acessa cada episodio e exibe o título assim como o trecho acima, no entanto
         // é utilizado expressão lambda, ou seja o código fica mais limpo, mais clean, e mais sucinto,
-        // toda execução é feita por trás
+        // toda execução é feita de forma otimizada
         temporadas.forEach(t-> t.episodios().forEach(e-> System.out.println(e.titulo())));
+
+        //Utilizando o Stream para percorrer somente uma lista
+        //**FlatMap realiza a buscar de outra lista para trazer os dados para lista atual
+        //** .toList trás os dados para uma lista imutavel
+        // ou seja não conseguimos modficar a estrutura da lista caso tenha necessidade de incluir mais dados na lista
+
+        //Esse metodo realiza a busca dos TOP 5 Episódios
+        List<DadosEpisodio> dadosEpisodios = temporadas.stream()
+                .flatMap(t -> t.episodios().stream())
+                .collect(Collectors.toList());
+                //.toList();
+        System.out.println("\nTop 5 episodios: ");
+        dadosEpisodios.stream()
+                .filter(e-> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .limit(5)
+                .forEach(System.out::println);
     }
 }
