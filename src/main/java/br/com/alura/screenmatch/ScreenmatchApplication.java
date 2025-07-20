@@ -6,10 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-
-//implements CommandLineRunner é uma interface que permite que eu crie algumas chamadas simples
-//antes do sistema completo rodar por exemplo limpar os caches/arquivos temporários ou criar alguma pasta entre outros.
-
 public class ScreenmatchApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
@@ -18,10 +14,7 @@ public class ScreenmatchApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-
 		Principal principal = new Principal();
 		principal.exibeMenu();
-
-
 	}
 }
